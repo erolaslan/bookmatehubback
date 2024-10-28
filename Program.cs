@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using BookMateHub.Data; // DbContext sınıfınızın bulunduğu namespace
+using BookMateHub.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // CORS politikası tanımlayın
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost5173", policy =>
+    options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins("http://localhost:5173", "http://www.bookmatehub.com")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -79,7 +79,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // CORS'u etkinleştirin
-app.UseCors("AllowLocalhost5173");
+app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 app.UseAuthentication(); // JWT doğrulamayı etkinleştir

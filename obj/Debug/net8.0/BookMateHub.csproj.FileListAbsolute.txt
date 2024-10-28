@@ -118,3 +118,4 @@
 /Users/erolaslan/development/Projects/BookMateHub/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/erolaslan/development/Projects/BookMateHub/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /Users/erolaslan/development/Projects/BookMateHub/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/erolaslan/development/Projects/BookMateHub/obj/Debug/net8.0/BookMateHub.sourcelink.json
