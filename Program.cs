@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://www.bookmatehub.com")
+        policy.WithOrigins("http://localhost:3000","http://localhost:5173", "http://www.bookmatehub.com")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -53,7 +53,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // JWT Ayarları
-var key = Encoding.ASCII.GetBytes("YourSecretKeyGoesHereErolAslan12345678"); // Güçlü bir gizli anahtar girin
+var key = Encoding.ASCII.GetBytes("YourSecretKeyGoesHereErolAslan12345678");
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -82,7 +82,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
-app.UseAuthentication(); // JWT doğrulamayı etkinleştir
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -94,4 +94,4 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
-app.Run();
+app.Run("http://0.0.0.0:5000");
