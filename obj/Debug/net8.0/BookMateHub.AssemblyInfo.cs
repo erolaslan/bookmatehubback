@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookMateHub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c33ba39e0985fe24e18593c9d469104e2ff46509")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+549b0897e710a78e718b9af3c2e488ad9657c6c9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookMateHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookMateHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
