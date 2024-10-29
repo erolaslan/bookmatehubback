@@ -7,7 +7,7 @@ using BookMateHub.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS politikası tanımlayın
+// CORS Politikası
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
@@ -19,13 +19,13 @@ builder.Services.AddCors(options =>
     });
 });
 
-// DbContext ve diğer servisleri ekleyin
+// DbContext ve Diğer Servisler
 builder.Services.AddDbContext<BookMateHubDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// Swagger servislerine JWT desteği ekleyin
+// Swagger için JWT Desteği
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookMateHub API", Version = "v1" });
@@ -72,11 +72,11 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
-// Swagger ve CORS ayarları
+// Swagger ve CORS Ayarları
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// CORS'u etkinleştirin
+// CORS'u Etkinleştir
 app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
@@ -85,12 +85,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Veritabanı migration işlemi
+// Veritabanı Migration İşlemi
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<BookMateHubDbContext>();
     dbContext.Database.Migrate();
 }
 
-// 5000 portunda uygulamayı başlat
+// Uygulamayı 5000 Portunda Başlat
 app.Run("http://0.0.0.0:5000");
