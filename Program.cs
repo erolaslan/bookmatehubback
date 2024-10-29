@@ -12,9 +12,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://www.bookmatehub.com","https://www.bookmatehub.com", "https://bookmatehub.com")
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://www.bookmatehub.com", "https://www.bookmatehub.com", "https://bookmatehub.com")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
@@ -72,11 +73,8 @@ builder.Services.AddAuthentication(options =>
 var app = builder.Build();
 
 // Swagger ve CORS ayarları
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // CORS'u etkinleştirin
 app.UseCors("AllowSpecificOrigins");
