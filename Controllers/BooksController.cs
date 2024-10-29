@@ -71,26 +71,28 @@ public class BooksController : ControllerBase
         return Ok("Kitap başarıyla güncellendi.");
     }
 
-    // Kitap durumunu güncelleme (Active, Passive veya Deleted yapma)
-    [HttpPut("{id}/status")]
-    [Authorize]
-    public async Task<IActionResult> UpdateBookStatus(int id, [FromBody] string status)
+// Kitap durumunu güncelleme (Active, Passive veya Deleted yapma)
+[HttpPut("{id}/status")]
+[Authorize]
+public async Task<IActionResult> UpdateBookStatus(int id, [FromBody] dynamic body)
+{
+    var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+    var book = await _context.Books.FindAsync(id);
+    if (book == null || book.UserId != userId)
     {
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
-        var book = await _context.Books.FindAsync(id);
-        if (book == null || book.UserId != userId)
-        {
-            return NotFound("Kitap bulunamadı veya yetkiniz yok.");
-        }
-
-        if (status == "Active" || status == "Passive" || status == "Deleted")
-        {
-            book.Status = status;
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
-        return BadRequest("Geçersiz durum değeri.");
+        return NotFound("Kitap bulunamadı veya yetkiniz yok.");
     }
+
+    var status = (string)body.status; // status alanını dinamik olarak al
+    if (status == "Active" || status == "Passive" || status == "Deleted")
+    {
+        book.Status = status;
+        await _context.SaveChangesAsync();
+        return NoContent(); // Başarılı güncelleme
+    }
+
+    return BadRequest("Geçersiz durum değeri.");
+}
+
 }
