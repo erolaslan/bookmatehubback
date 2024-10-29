@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("http://localhost:3000","http://localhost:5173", "http://www.bookmatehub.com")
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://www.bookmatehub.com","https://www.bookmatehub.com", "https://bookmatehub.com")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -94,4 +94,5 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
+// 5000 portunda uygulamayı başlat
 app.Run("http://0.0.0.0:5000");
