@@ -74,7 +74,7 @@ public class BooksController : ControllerBase
 // Kitap durumunu güncelleme (Active, Passive veya Deleted yapma)
 [HttpPut("{id}/status")]
 [Authorize]
-public async Task<IActionResult> UpdateBookStatus(int id, [FromBody] UpdateBookStatusRequest request)
+public async Task<IActionResult> UpdateBookStatus(int id, [FromBody] string status)
 {
     var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
@@ -84,15 +84,16 @@ public async Task<IActionResult> UpdateBookStatus(int id, [FromBody] UpdateBookS
         return NotFound("Kitap bulunamadı veya yetkiniz yok.");
     }
 
-    if (request.Status == "Active" || request.Status == "Passive" || request.Status == "Deleted")
+    if (status == "Active" || status == "Passive" || status == "Deleted")
     {
-        book.Status = request.Status;
+        book.Status = status;
         await _context.SaveChangesAsync();
         return NoContent(); // Başarılı güncelleme
     }
 
     return BadRequest("Geçersiz durum değeri.");
 }
+
 
 
 
