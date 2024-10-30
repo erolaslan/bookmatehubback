@@ -95,4 +95,5 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Uygulamayı 5001 Portunda Başlat
-app.Run("https://0.0.0.0:5000");
+//app.Run("https://0.0.0.0:5000");
+app.Run();
