@@ -65,6 +65,7 @@ public class BooksController : ControllerBase
 
         book.Title = updatedBook.Title;
         book.Author = updatedBook.Author;
+        book.ReadingDate=updatedBook.ReadingDate;
         book.Status = updatedBook.Status;
 
         await _context.SaveChangesAsync();
