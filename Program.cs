@@ -94,6 +94,5 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
-// Uygulamayı 5001 Portunda Başlat
-//app.Run("https://0.0.0.0:5000");
-app.Run();
+
+app.Run("https://0.0.0.0:5000");
