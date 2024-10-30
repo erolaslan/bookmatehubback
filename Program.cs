@@ -14,8 +14,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://www.bookmatehub.com", "https://www.bookmatehub.com", "https://bookmatehub.com")
               .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
+              .AllowAnyMethod();
     });
 });
 
@@ -74,7 +73,10 @@ var app = builder.Build();
 
 // Swagger ve CORS Ayarları
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookMateHub API V1");
+});
 
 // CORS'u Etkinleştir
 app.UseCors("AllowSpecificOrigins");
@@ -92,5 +94,6 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
-// Uygulamayı 5000 Portunda Başlat
-app.Run("http://0.0.0.0:5000");
+// Uygulamayı 5001 Portunda Başlat
+//app.Run("https://0.0.0.0:5172");
+app.Run();

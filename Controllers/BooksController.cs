@@ -71,26 +71,22 @@ public class BooksController : ControllerBase
         return Ok("Kitap başarıyla güncellendi.");
     }
 
-    public class UpdateBookStatusRequest
+[HttpGet("delete")]
+[Authorize]
+public async Task<IActionResult> DeleteBook([FromQuery] int id)
+{
+    var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+    var book = await _context.Books.FindAsync(id);
+    if (book == null || book.UserId != userId)
     {
-        public string Status { get; set; }
+        return NotFound("Kitap bulunamadı veya yetkiniz yok.");
     }
 
-    [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> DeleteBook([FromQuery] int id = 0)
-    {
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+    book.Status = "Deleted";
+    await _context.SaveChangesAsync();
+    return NoContent(); // Başarılı güncelleme
+}
 
-        var book = await _context.Books.FindAsync(id);
-        if (book == null || book.UserId != userId)
-        {
-            return NotFound("Kitap bulunamadı veya yetkiniz yok.");
-        }
-
-        book.Status = "Deleted";
-        await _context.SaveChangesAsync();
-        return NoContent(); // Başarılı güncelleme
-    }
 
 }
