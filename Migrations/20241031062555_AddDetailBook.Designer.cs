@@ -3,6 +3,7 @@ using System;
 using BookMateHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookMateHub.Migrations
 {
     [DbContext(typeof(BookMateHubDbContext))]
-    partial class BookMateHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241031062555_AddDetailBook")]
+    partial class AddDetailBook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +102,7 @@ namespace BookMateHub.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("Note");
                 });
 
             modelBuilder.Entity("Note", b =>

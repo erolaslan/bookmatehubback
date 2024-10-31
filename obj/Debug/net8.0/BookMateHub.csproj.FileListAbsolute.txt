@@ -119,3 +119,5 @@
 /Users/erolaslan/development/Projects/BookMateHub/obj/Debug/net8.0/BookMateHub.pdb
 /Users/erolaslan/development/Projects/BookMateHub/obj/Debug/net8.0/BookMateHub.genruntimeconfig.cache
 /Users/erolaslan/development/Projects/BookMateHub/obj/Debug/net8.0/ref/BookMateHub.dll
+/Users/erolaslan/development/Projects/BookMateHub/bin/Debug/net8.0/package-lock.json
+/Users/erolaslan/development/Projects/BookMateHub/bin/Debug/net8.0/package.json
